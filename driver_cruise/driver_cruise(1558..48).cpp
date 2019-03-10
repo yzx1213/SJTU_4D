@@ -119,7 +119,7 @@ static void userDriverGetParam(float midline[200][2], float yaw, float yawrate, 
 	_rpm = rpm;
 	_gearbox = gearbox;
 	c = getR(_midline[0][0], _midline[0][1], _midline[10][0], _midline[10][1], _midline[20][0], _midline[20][1]);
-	radius = c.r; //radius ±íÊ¾Ç°·½¹Ì¶¨¾àÀëµÄÇúÂÊ°ë¾¶
+	radius = c.r; //radius è¡¨ç¤ºå‰æ–¹å›ºå®šè·ç¦»çš„æ›²ç‡åŠå¾„
 }
 
 static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, int* cmdGear) {

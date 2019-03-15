@@ -124,7 +124,7 @@ static void userDriverGetParam(float midline[200][2], float yaw, float yawrate, 
 	_rpm = rpm;
 	_gearbox = gearbox;
 	c = getR(_midline[0][0], _midline[0][1], _midline[7][0], _midline[7][1], _midline[14][0], _midline[14][1]);
-	radius = c.r; //radius ±íÊ¾Ç°·½¹Ì¶¨¾àÀëµÄÇúÂÊ°ë¾¶
+	radius = c.r; //radius è¡¨ç¤ºå‰æ–¹å›ºå®šè·ç¦»çš„æ›²ç‡åŠå¾„
 }
 
 static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, int* cmdGear) {
@@ -140,7 +140,7 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 		Enjoy  -_-
 		*/
 
-     //¼ì²âÈüµÀ²ÄÖÊ
+     //æ£€æµ‹èµ›é“æè´¨
 		if (_speed <= 30)
 		{
 			*cmdAcc = 1;
@@ -154,7 +154,7 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 		else if(_speed>30&&trial>200)
 			dirt = 1;
 		trial2 = 1 * dirt;
-		//¼ì²âÍê³É
+		//æ£€æµ‹å®Œæˆ
 
 		if (trial2!=0)
 		{

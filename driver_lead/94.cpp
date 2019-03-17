@@ -78,25 +78,25 @@ static void userDriverGetParam(float midline[200][2], float yaw, float yawrate, 
 
 
 static float ki,k; 
-static int counter=0;//¶¨Òå±äÁ¿
+static int counter=0;//å®šä¹‰å˜é‡
 
 static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, int* cmdGear){
 	/* write your own code here */
-	/*******************************Â·¾¶Éè¼Æ********************************/
+	/*******************************è·¯å¾„è®¾è®¡********************************/
 	/*switch(_laps)
 	{
-	    case 1: ki = 0;break;           //µÚÒ»È¦Õı³£ĞĞÊ»
-	    case 2: ki += 0.01 * PI; break; //µÚ¶şÈ¦ÇúÏßĞĞÊ»
-		case 3: ki = 0;//µÚÈıÈ¦µÄÊ±ºò½øĞĞÒ»¶¨µÄ±£»¤
+	    case 1: ki = 0;break;           //ç¬¬ä¸€åœˆæ­£å¸¸è¡Œé©¶
+	    case 2: ki += 0.01 * PI; break; //ç¬¬äºŒåœˆæ›²çº¿è¡Œé©¶
+		case 3: ki = 0;//ç¬¬ä¸‰åœˆçš„æ—¶å€™è¿›è¡Œä¸€å®šçš„ä¿æŠ¤
 	    default: break;
 	}
 	k = sin(ki)/2.0;
 	*/
 	switch (_laps)
 	{
-	case 1: ki = 0;k = 0;break;           //µÚÒ»È¦Õı³£ĞĞÊ»
-	case 2: ki += 0.01; counter++ ;break; //µÚ¶şÈ¦ÇúÏßĞĞÊ»
-	case 3: ki = 0;//µÚÈıÈ¦µÄÊ±ºò½øĞĞÒ»¶¨µÄ±£»¤
+	case 1: ki = 0;k = 0;break;           //ç¬¬ä¸€åœˆæ­£å¸¸è¡Œé©¶
+	case 2: ki += 0.01; counter++ ;break; //ç¬¬äºŒåœˆæ›²çº¿è¡Œé©¶
+	case 3: ki = 0;//ç¬¬ä¸‰åœˆçš„æ—¶å€™è¿›è¡Œä¸€å®šçš„ä¿æŠ¤
 	default: break;
 	}
 	
@@ -111,9 +111,9 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 		else k = (abs(ki - counter / 100))-0.9;
 	}
 		
-	/*******************************³µÁ¾¿ØÖÆ********************************/
+	/*******************************è½¦è¾†æ§åˆ¶********************************/
 	
-	//ÓÍÃÅ¸ø80%
+	//æ²¹é—¨ç»™80%
 	/*if ((counter%300)<200)
 	{
 		*cmdAcc = 1;
@@ -126,8 +126,8 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 	}*/
 	*cmdAcc = 1;
 	*cmdBrake=0;
-	*cmdSteer = (_yaw -8*atan2( _midline[30][0]+k*_width ,_midline[30][1]))/3.14 ;//Éè¶¨¶æ»ú·½Ïò
-	*cmdGear = 1;//µµÎ»Ê¼ÖÕ¹Ò1
+	*cmdSteer = (_yaw -8*atan2( _midline[30][0]+k*_width ,_midline[30][1]))/3.14 ;//è®¾å®šèˆµæœºæ–¹å‘
+	*cmdGear = 1;//æ¡£ä½å§‹ç»ˆæŒ‚1
 	printf("lap %d counter %d\n",_laps, counter);
 	
 }

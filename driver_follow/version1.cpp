@@ -88,7 +88,7 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 	lastTimeLeaderSpeed = leaderspeed;
 	speedErr = leaderspeed - _speed;
 
-	D_err = 0.5 * atan2(_Leader_X, _Leader_Y) + 0.5 * _Leader_X + 0.0016*(fabs(_midline[0][0]))*(fabs(_midline[0][0]));//·½ÏòÆ«²îÄ£ĞÍ
+	D_err = 0.5 * atan2(_Leader_X, _Leader_Y) + 0.5 * _Leader_X + 0.0016*(fabs(_midline[0][0]))*(fabs(_midline[0][0]));//æ–¹å‘åå·®æ¨¡å‹
 	D_errDiff = D_err - Tmp;
 	Tmp = D_err;
 
@@ -105,7 +105,7 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 
 
 
-	if (speedErr > 0) {//Í·³µËÙ¶È´ó
+	if (speedErr > 0) {//å¤´è½¦é€Ÿåº¦å¤§
 
 
 
@@ -119,32 +119,32 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 		}
 	}
 
-	if (speedErr < 0 && speedErr > -20) {//Í·³µËÙ¶ÈĞ¡£¬ÇÒÍ·³µ¸ú³µËÙ¶ÈÏà²î²»´ó
+	if (speedErr < 0 && speedErr > -20) {//å¤´è½¦é€Ÿåº¦å°ï¼Œä¸”å¤´è½¦è·Ÿè½¦é€Ÿåº¦ç›¸å·®ä¸å¤§
 
-		if (_Leader_Y < 14 && leaderAcc > -20) {//¾àÀë½ü Í·³µ¼õËÙ²»Ã÷ÏÔ
+		if (_Leader_Y < 14 && leaderAcc > -20) {//è·ç¦»è¿‘ å¤´è½¦å‡é€Ÿä¸æ˜æ˜¾
 			*cmdAcc = 0;
 			*cmdBrake = -0.2 * speedErr - 0.01 * leaderAcc;
 		}
-		else if (_Leader_Y < 14 && leaderAcc < -30) {//¾àÀë½ü Í·³µ¼õËÙÃ÷ÏÔ
+		else if (_Leader_Y < 14 && leaderAcc < -30) {//è·ç¦»è¿‘ å¤´è½¦å‡é€Ÿæ˜æ˜¾
 			*cmdAcc = 0;
 			*cmdBrake = -0.5 * speedErr - 0.1 * leaderAcc;
 		}
 
-		else if (_Leader_Y > 14 && leaderAcc < -30) {//¾àÀëÔ¶ Í·³µÃ÷ÏÔ¼õËÙ
+		else if (_Leader_Y > 14 && leaderAcc < -30) {//è·ç¦»è¿œ å¤´è½¦æ˜æ˜¾å‡é€Ÿ
 			*cmdAcc = 0;
 			*cmdBrake = -speedErr - 0.1 * leaderAcc;
 		}
 
 
 
-		else if (_Leader_Y > 14 && leaderAcc > -20) {//¾àÀëÔ¶ Í·³µ¼õËÙ²»Ã÷ÏÔ
+		else if (_Leader_Y > 14 && leaderAcc > -20) {//è·ç¦»è¿œ å¤´è½¦å‡é€Ÿä¸æ˜æ˜¾
 			*cmdAcc = 0.1 * (_Leader_Y - 10);
 			*cmdBrake = 0;
 		}
 
 	}
 
-	if (speedErr < -20) {//Í·³µËÙ¶ÈĞ¡£¬ÇÒÍ·³µ¸ú³µËÙ¶ÈÏà²î¾Ş´ó£¬¼´ĞèÒª½ô¼±É²³µ
+	if (speedErr < -20) {//å¤´è½¦é€Ÿåº¦å°ï¼Œä¸”å¤´è½¦è·Ÿè½¦é€Ÿåº¦ç›¸å·®å·¨å¤§ï¼Œå³éœ€è¦ç´§æ€¥åˆ¹è½¦
 
 		*cmdAcc = 0;
 		*cmdBrake = 1;

@@ -97,7 +97,7 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 	D_errDiff = D_err - Tmp;
 	Tmp = D_err;
 
-	float D = fabs(D_err < 1.1) ? 0 : 2 * fabs(D_err) - 2.1;
+	float D = fabs(D_err < 1.1) ? 0 : 2 * fabs(D_err) - 2.2;
 	float S = leaderspeed >= 60 ? 2.9*log(leaderspeed) - 1.14 : 10.6;
 	if (leaderAcc > 0)	safe_distance = constrain(10.5, 25, S + D - 0.2);
 	if (leaderAcc <= 0)	safe_distance = constrain(10.5, 25, S - int(leaderAcc*0.03) + D - 0.2);

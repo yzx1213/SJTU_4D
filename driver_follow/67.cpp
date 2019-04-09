@@ -1,13 +1,10 @@
 /***************************************************************************
-
 file : driver_cruise.cpp
 description : user module for CyberFollow
-
 ***************************************************************************/
 
 /*
 WARNING !
-
 DO NOT MODIFY CODES BELOW!
 */
 
@@ -46,7 +43,6 @@ static int InitFuncPt(int, void *pt)
 
 /*
 WARNING!
-
 DO NOT MODIFY CODES ABOVE!
 */
 
@@ -107,9 +103,7 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 	if (leaderAcc <= 0)	safe_distance = constrain(10.5, 25, S - int(leaderAcc*0.03) + D - 0.2);
 	//*cmdSteer = (- 0.8 * D_err - 0.25 *D_errDiff) - 0.8*atan(4 * _Leader_X / _speed) + 0.016*fabs(_midline[0][0]);
 
-	if (fabs(D_err) < 0.007) *cmdSteer = 0.5*D_err - 1.8*D_errDiff;
-	else if (fabs(D_err)<0.45)*cmdSteer = -0.6 * D_err - 1.8 * D_errDiff;
-	else *cmdSteer = -0.51* D_err - 1.8 * D_errDiff;
+	 *cmdSteer = -0.51* D_err - 1.8 * D_errDiff;
 
 	if (_Leader_Y < 12) {
 		*cmdAcc = 0;

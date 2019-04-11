@@ -96,8 +96,8 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 	last_midline = _midline[0][0];
 
 
-	//D_err Îª¸º£¬Í·³µÔÚ×ó²à Ğè×ó×ª
-	D_err = 1.6 * _Leader_X;//·½ÏòÆ«²îÄ£ĞÍ
+	//D_err ä¸ºè´Ÿï¼Œå¤´è½¦åœ¨å·¦ä¾§ éœ€å·¦è½¬
+	D_err = 1.6 * _Leader_X;//æ–¹å‘åå·®æ¨¡å‹
 	D_errDiff = D_err - Tmp;
 	Tmp = D_err;
 
@@ -118,7 +118,7 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 	//	*cmdGear = 1;
 	//}
 
-	if (speedErr > 0) {//Í·³µËÙ¶È´ó
+	if (speedErr > 0) {//å¤´è½¦é€Ÿåº¦å¤§
 		if (_Leader_Y > safe_distance && fabs(*cmdSteer) < 0.5) {
 			*cmdAcc = (_Leader_Y - safe_distance) * 0.3 + 0.1* speedErr + leaderAcc * 0.05;
 			*cmdBrake = 0;state = 1.1;
@@ -137,51 +137,51 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 
 
 
-	if (speedErr < 0 && speedErr > -20) {//Í·³µËÙ¶ÈĞ¡£¬ÇÒÍ·³µ¸ú³µËÙ¶ÈÏà²î²»´ó
+	if (speedErr < 0 && speedErr > -20) {//å¤´è½¦é€Ÿåº¦å°ï¼Œä¸”å¤´è½¦è·Ÿè½¦é€Ÿåº¦ç›¸å·®ä¸å¤§
 
-		if (_Leader_Y < safe_distance && leaderAcc > -30 && _speed < 150) {//¾àÀë½ü Í·³µ¼õËÙ²»Ã÷ÏÔ ËÙ¶È½ÏÂı
+		if (_Leader_Y < safe_distance && leaderAcc > -30 && _speed < 150) {//è·ç¦»è¿‘ å¤´è½¦å‡é€Ÿä¸æ˜æ˜¾ é€Ÿåº¦è¾ƒæ…¢
 			*cmdAcc = 0;
 			*cmdBrake = -0.2 * speedErr - 0.01 * leaderAcc;state = 2.1;
 		}
-		else if (_Leader_Y < safe_distance && leaderAcc > -30 && _speed > 150) {//¾àÀë½ü Í·³µ¼õËÙ²»Ã÷ÏÔ ËÙ¶È½Ï¿ì
+		else if (_Leader_Y < safe_distance && leaderAcc > -30 && _speed > 150) {//è·ç¦»è¿‘ å¤´è½¦å‡é€Ÿä¸æ˜æ˜¾ é€Ÿåº¦è¾ƒå¿«
 			*cmdAcc = 0;
 			*cmdBrake = -2 * speedErr - 1 * leaderAcc;state = 2.2;
 		}
 
-		else if (_Leader_Y < safe_distance && leaderAcc < -30) {//¾àÀë½ü Í·³µ¼õËÙÃ÷ÏÔ
+		else if (_Leader_Y < safe_distance && leaderAcc < -30) {//è·ç¦»è¿‘ å¤´è½¦å‡é€Ÿæ˜æ˜¾
 			*cmdAcc = 0;
 			*cmdBrake = 1;state = 2.3;
 		}
 
-		else if (_Leader_Y > safe_distance + 1 && leaderAcc < -50) {//¾àÀëºÜÔ¶ Í·³µÌØ±ğÃ÷ÏÔ¼õËÙ
+		else if (_Leader_Y > safe_distance + 1 && leaderAcc < -50) {//è·ç¦»å¾ˆè¿œ å¤´è½¦ç‰¹åˆ«æ˜æ˜¾å‡é€Ÿ
 			*cmdAcc = 0;
 			*cmdBrake = 0.1*-speedErr - 0.1 * leaderAcc;state = 2.4;
 		}
 
-		else if (_Leader_Y > safe_distance + 1 && leaderAcc < -30) {//¾àÀëºÜÔ¶ Í·³µ½ÏÃ÷ÏÔ¼õËÙ
+		else if (_Leader_Y > safe_distance + 1 && leaderAcc < -30) {//è·ç¦»å¾ˆè¿œ å¤´è½¦è¾ƒæ˜æ˜¾å‡é€Ÿ
 			*cmdAcc = 0;
 			*cmdBrake = 0.1*-speedErr - 0.001 * leaderAcc;state = 2.5;
 		}
 
 
-		else if (_Leader_Y > safe_distance && leaderAcc < -30) {//¾àÀë½ÏÔ¶ Í·³µÃ÷ÏÔ¼õËÙ
+		else if (_Leader_Y > safe_distance && leaderAcc < -30) {//è·ç¦»è¾ƒè¿œ å¤´è½¦æ˜æ˜¾å‡é€Ÿ
 			*cmdAcc = 0;
 			*cmdBrake = -speedErr - 0.01 * leaderAcc;state = 2.6;
 		}
 
-		else if (_Leader_Y > safe_distance && leaderAcc > -20 && fabs(D_err) < 0.4&&safe_distance > 10.6) {//¾àÀëÔ¶ Í·³µ¼õËÙ²»Ã÷ÏÔ ÇÒ×ªÏò²»Ã÷ÏÔ
+		else if (_Leader_Y > safe_distance && leaderAcc > -20 && fabs(D_err) < 0.4&&safe_distance > 10.6) {//è·ç¦»è¿œ å¤´è½¦å‡é€Ÿä¸æ˜æ˜¾ ä¸”è½¬å‘ä¸æ˜æ˜¾
 			*cmdAcc = 0.5 * (_Leader_Y - safe_distance);
 			*cmdBrake = 0;state = 2.7;
 		}
-		else if (_Leader_Y > safe_distance && leaderAcc > -20 && fabs(D_err) < 0.4&&safe_distance < 10.6) {//¾àÀëÔ¶ Í·³µ¼õËÙ²»Ã÷ÏÔ ÇÒ×ªÏò²»Ã÷ÏÔ
+		else if (_Leader_Y > safe_distance && leaderAcc > -20 && fabs(D_err) < 0.4&&safe_distance < 10.6) {//è·ç¦»è¿œ å¤´è½¦å‡é€Ÿä¸æ˜æ˜¾ ä¸”è½¬å‘ä¸æ˜æ˜¾
 			*cmdAcc = 0.2 * (_Leader_Y - safe_distance);
 			*cmdBrake = 0;state = 2.8;
 		}
-		else if (_Leader_Y > safe_distance && leaderAcc > -20 && fabs(D_err) > 0.4) {//¾àÀëÔ¶ Í·³µ¼õËÙ²»Ã÷ÏÔ µ«×ªÏòÃ÷ÏÔ
+		else if (_Leader_Y > safe_distance && leaderAcc > -20 && fabs(D_err) > 0.4) {//è·ç¦»è¿œ å¤´è½¦å‡é€Ÿä¸æ˜æ˜¾ ä½†è½¬å‘æ˜æ˜¾
 			*cmdAcc = 0;
 			*cmdBrake = 0.1;state = 2.9;
 		}
-		else if (_Leader_Y > safe_distance && leaderAcc < -20) {//¾àÀë½ÏÔ¶ Í·³µÉÔÃ÷ÏÔ¼õËÙ
+		else if (_Leader_Y > safe_distance && leaderAcc < -20) {//è·ç¦»è¾ƒè¿œ å¤´è½¦ç¨æ˜æ˜¾å‡é€Ÿ
 			*cmdAcc = 0;
 			*cmdBrake = -0.1*speedErr - 0.01 * leaderAcc;state = 2.11;
 		}
@@ -189,7 +189,7 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 
 	}
 
-	if (speedErr < -20) {//Í·³µËÙ¶ÈĞ¡£¬ÇÒÍ·³µ¸ú³µËÙ¶ÈÏà²î¾Ş´ó£¬¼´ĞèÒª½ô¼±É²³µ
+	if (speedErr < -20) {//å¤´è½¦é€Ÿåº¦å°ï¼Œä¸”å¤´è½¦è·Ÿè½¦é€Ÿåº¦ç›¸å·®å·¨å¤§ï¼Œå³éœ€è¦ç´§æ€¥åˆ¹è½¦
 
 		*cmdAcc = 0;
 		*cmdBrake = 1;
@@ -201,7 +201,7 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 		*cmdBrake = 0.15;
 	}
 	
-	if (D_err < -0.2 && *cmdSteer>0 && *cmdAcc == 0 && safe_distance > 12)//·ÀÖ¹×ó×ª±»Ë¦³öÈ¥
+	if (D_err < -0.2 && *cmdSteer>0 && *cmdAcc == 0 && safe_distance > 12)//é˜²æ­¢å·¦è½¬è¢«ç”©å‡ºå»
 	{*cmdBrake = 0.1;state = 1.99;}
 
 	if (_midline[0][0] < -5 && delta_midline< 0 && *cmdSteer>0)

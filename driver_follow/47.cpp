@@ -101,8 +101,8 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 	acc = (_speed - last_speed) / 0.02;
 	last_speed = _speed;
 
-	//D_err Îª¸º£¬Í·³µÔÚ×ó²à Ğè×ó×ª
-	D_err = 1.6 * _Leader_X;//·½ÏòÆ«²îÄ£ĞÍ
+	//D_err ä¸ºè´Ÿï¼Œå¤´è½¦åœ¨å·¦ä¾§ éœ€å·¦è½¬
+	D_err = 1.6 * _Leader_X;//æ–¹å‘åå·®æ¨¡å‹
 	D_errDiff = D_err - Tmp;
 	Tmp = D_err;
 
@@ -129,13 +129,13 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 
 		}
 	}
-	if (speedErr < 0 && speedErr > -10) {//Í·³µËÙ¶ÈĞ¡£¬ÇÒÍ·³µ¸ú³µËÙ¶ÈÏà²î²»´ó
+	if (speedErr < 0 && speedErr > -10) {//å¤´è½¦é€Ÿåº¦å°ï¼Œä¸”å¤´è½¦è·Ÿè½¦é€Ÿåº¦ç›¸å·®ä¸å¤§
 
-		if (_Leader_Y < safe_distance && leaderAcc > -20 && _speed < 150) {//¾àÀë½ü Í·³µ¼õËÙ²»Ã÷ÏÔ ËÙ¶È½ÏÂı
+		if (_Leader_Y < safe_distance && leaderAcc > -20 && _speed < 150) {//è·ç¦»è¿‘ å¤´è½¦å‡é€Ÿä¸æ˜æ˜¾ é€Ÿåº¦è¾ƒæ…¢
 			*cmdAcc = 0;
 			*cmdBrake = -0.05 * speedErr - 0.006 * leaderAcc + 0.08*(safe_distance - _Leader_Y);
 		}
-		else if (_Leader_Y < safe_distance && leaderAcc > -20 && _speed > 150) {//¾àÀë½ü Í·³µ¼õËÙ²»Ã÷ÏÔ ËÙ¶È½Ï¿ì
+		else if (_Leader_Y < safe_distance && leaderAcc > -20 && _speed > 150) {//è·ç¦»è¿‘ å¤´è½¦å‡é€Ÿä¸æ˜æ˜¾ é€Ÿåº¦è¾ƒå¿«
 			*cmdAcc = 0;
 			*cmdBrake = -0.07 * speedErr - 0.008* leaderAcc + 0.09*(safe_distance - _Leader_Y);
 		}
@@ -148,7 +148,7 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 			*cmdBrake = -leaderAcc * 0.06 - 0.075*(_Leader_Y - safe_distance) - 0.045*speedErr;
 		}
 
-		else if (_Leader_Y > safe_distance && leaderAcc > -20 && fabs(D_err) < 0.4 && c.r < 500) {//¾àÀëÔ¶ Í·³µ¼õËÙ²»Ã÷ÏÔ ÇÒ×ªÏò²»Ã÷ÏÔ
+		else if (_Leader_Y > safe_distance && leaderAcc > -20 && fabs(D_err) < 0.4 && c.r < 500) {//è·ç¦»è¿œ å¤´è½¦å‡é€Ÿä¸æ˜æ˜¾ ä¸”è½¬å‘ä¸æ˜æ˜¾
 			*cmdAcc = 0.42 * (_Leader_Y - safe_distance)+0.07*leaderAcc - 0.2*fabs(D_err);
 			*cmdBrake = 0;
 		}
@@ -158,14 +158,14 @@ static void userDriverSetParam(float* cmdAcc, float* cmdBrake, float* cmdSteer, 
 			*cmdBrake = 0;
 		}
 
-		else if (_Leader_Y > safe_distance && leaderAcc > -20 && fabs(D_err) > 0.4) {//¾àÀëÔ¶ Í·³µ¼õËÙ²»Ã÷ÏÔ µ«×ªÏòÃ÷ÏÔ
+		else if (_Leader_Y > safe_distance && leaderAcc > -20 && fabs(D_err) > 0.4) {//è·ç¦»è¿œ å¤´è½¦å‡é€Ÿä¸æ˜æ˜¾ ä½†è½¬å‘æ˜æ˜¾
 			*cmdAcc = 0.3*(_Leader_Y-safe_distance)-0.25*fabs(D_err);
 			*cmdBrake = 0;
 		}
 
 	}
 
-	if (speedErr < -10) {//Í·³µËÙ¶ÈĞ¡£¬ÇÒÍ·³µ¸ú³µËÙ¶ÈÏà²î¾Ş´ó£¬¼´ĞèÒª½ô¼±É²³µ
+	if (speedErr < -10) {//å¤´è½¦é€Ÿåº¦å°ï¼Œä¸”å¤´è½¦è·Ÿè½¦é€Ÿåº¦ç›¸å·®å·¨å¤§ï¼Œå³éœ€è¦ç´§æ€¥åˆ¹è½¦
 
 		*cmdAcc = 0;
 		*cmdBrake = 1;

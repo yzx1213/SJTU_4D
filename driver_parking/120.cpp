@@ -105,7 +105,7 @@ static int flagt = 0;
 float offset = _width / 3;
 static void userDriverSetParam(bool* bFinished, float* cmdAcc, float* cmdBrake, float* cmdSteer, int* cmdGear) {
 
-	if (abs(_lotAngle) > (PI / 2 - 0.05) && abs(_lotAngle) < (PI / 2 + 0.05))                       //¼ÆËã³µÁ¾ÖĞĞÄÓë²´³µÎ»ËùÔÚÖ±ÏßµÄ¾àÀë£¬ÓÃÒÔÅĞ¶ÏÊÇ·ñ¿ªÊ¼²´³µ
+	if (abs(_lotAngle) > (PI / 2 - 0.05) && abs(_lotAngle) < (PI / 2 + 0.05))                       //è®¡ç®—è½¦è¾†ä¸­å¿ƒä¸æ³Šè½¦ä½æ‰€åœ¨ç›´çº¿çš„è·ç¦»ï¼Œç”¨ä»¥åˆ¤æ–­æ˜¯å¦å¼€å§‹æ³Šè½¦
 		dist = (_carX - _lotX);
 	else
 	{
@@ -132,10 +132,10 @@ static void userDriverSetParam(bool* bFinished, float* cmdAcc, float* cmdBrake, 
 	if (!*bFinished) {
 		if (s < 1 && _speed < 0.05) *bFinished = 1;
 		if (s > 70 || fabs(dist) > 70) {
-			*cmdAcc = 1;//ÓÍÃÅ¸ø100%
-			*cmdBrake = 0;//ÎŞÉ²³µ
-			*cmdSteer = (_yaw - 8 * atan2(_midline[30][0], _midline[30][1])) / 3.14;//Éè¶¨¶æ»ú·½Ïò
-			*cmdGear = 1;//µµÎ»Ê¼ÖÕ¹Ò1
+			*cmdAcc = 1;//æ²¹é—¨ç»™100%
+			*cmdBrake = 0;//æ— åˆ¹è½¦
+			*cmdSteer = (_yaw - 8 * atan2(_midline[30][0], _midline[30][1])) / 3.14;//è®¾å®šèˆµæœºæ–¹å‘
+			*cmdGear = 1;//æ¡£ä½å§‹ç»ˆæŒ‚1
 			state = 1;
 		}
 		else if ((fabs(dist) < start_p && fabs(fabs(_yaw) - PI / 2) < 0.05 && s_diff > -0.04 && y<0.02) || state == 5) {
